@@ -212,6 +212,10 @@ void pr_proctitle_set_str(const char *str) {
 void pr_session_disconnect(module *m, int reason_code, const char *details) {
 }
 
+const char *pr_session_get_protocol(int flags) {
+  return "ftp";
+}
+
 int pr_session_set_idle(void) {
   return 0;
 }
