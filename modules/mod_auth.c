@@ -28,6 +28,7 @@
 
 #include "conf.h"
 #include "privs.h"
+#include "error.h"
 
 #ifdef HAVE_USERSEC_H
 # include <usersec.h>
@@ -210,11 +211,18 @@ static int auth_sess_init(void) {
   }
 
   if (auth_client_connected == FALSE) {
-    int res = 0;
+    int res = 0, xerrno;
+    pr_error_t *err;
 
     PRIVS_ROOT
     res = pr_open_scoreboard(O_RDWR);
+    xerrno = errno;
+    err = pr_error_create(session.pool, xerrno);
+    pr_error_set_location(err, &auth_module, __FILE__, __LINE__ - 3);
     PRIVS_RELINQUISH
+
+    pr_error_set_goal(err, "open ScoreboardFile");
+    pr_error_set_operation(err, "open()");
 
     if (res < 0) {
       switch (res) {
@@ -233,9 +241,11 @@ static int auth_sess_init(void) {
           break;
 
         default:
-          pr_log_debug(DEBUG0, "error opening scoreboard: %s", strerror(errno));
+          pr_log_debug(DEBUG0, "%s", pr_error_strerror(err, 0));
           break;
       }
+
+      pr_error_destroy(err);
     }
   }
 
