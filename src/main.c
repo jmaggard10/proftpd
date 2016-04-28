@@ -1795,7 +1795,7 @@ static void inetd_main(void) {
     PRIVS_RELINQUISH
 
     pr_error_set_goal(err, "ScoreboardFile opening");
-    pr_error_set_operation(err, "open()");
+    pr_error_set_operation(err, "open(2)");
 
     switch (res) {
       case PR_SCORE_ERR_BAD_MAGIC:
@@ -1820,7 +1820,7 @@ static void inetd_main(void) {
           PRIVS_RELINQUISH
 
           pr_error_set_goal(err, "ScoreboardFile opening");
-          pr_error_set_operation(err, "open()");
+          pr_error_set_operation(err, "open(2)");
 
           pr_log_pri(PR_LOG_ERR, "%s", pr_error_strerror(err, 0));
           pr_error_destroy(err);
@@ -1878,7 +1878,7 @@ static void standalone_main(void) {
     PRIVS_RELINQUISH
 
     pr_error_set_goal(err, "ScoreboardFile opening");
-    pr_error_set_operation(err, "open()");
+    pr_error_set_operation(err, "open(2)");
 
     switch (res) {
       case PR_SCORE_ERR_BAD_MAGIC:
