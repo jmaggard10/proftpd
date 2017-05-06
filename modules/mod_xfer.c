@@ -2674,7 +2674,7 @@ MODRET xfer_retr(cmd_rec *cmd) {
        */
       int already_aborted = FALSE, xerrno = errno;
 
-      retr_abort();
+      retr_abort(cmd->pool);
 
       /* Do we need to abort the data transfer here?  It's possible that
        * the transfer has already been aborted, e.g. via the TCP OOB marker
