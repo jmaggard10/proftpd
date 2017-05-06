@@ -52,7 +52,7 @@ TEST_API_DEPS=\
   $(top_builddir)/src/json.o \
   $(top_builddir)/src/redis.o \
   $(top_builddir)/src/error.o \
-  $(top_srcdir)/src/fsio-err.o
+  $(top_builddir)/src/fsio-err.o
 
 TEST_API_LIBS=-lcheck -lm
 

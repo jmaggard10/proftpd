@@ -6508,7 +6508,6 @@ static int fxp_handle_close(struct fxp_packet *fxp) {
             curr_path, real_path, strerror(xerrno));
         }
 
-
         (void) pr_fsio_unlink(curr_path);
       }
     }
